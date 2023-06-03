@@ -24,7 +24,7 @@ h1 {
 }
 h2 {
     background-color: white;
-    padding: 20px;
+    padding: 40px 0px 10px 30px;
     margin: 0;
 }
 h2, footer {
@@ -40,19 +40,16 @@ h1, h2, h3 {
 p, dl, dd {
     font-size: 1em;
 }
-#playlists section, #curated section {
-    text-align: center;
-}
-
 footer p {
     font-size: .75em;
 }
 dl {
     display:flex;
 }
-dt {
-    padding-right: 5px;
+em {
+    color:#590242;
 }
+
 audio {
     position: absolute;
     bottom: 150px;
@@ -90,14 +87,15 @@ a {
     padding: 10px;
     width: 150px;
     text-align: center;
-    margin: 30px 32px 0px 32px;
+    margin: 25px 32px 5px 32px;
+    z-index: 100;
 }
 .more_section {
     display: flex;
     align-items: center;
     justify-content: left;
     background-color: white;
-    height: 60px;
+    height: 45px;
 }
 
 .more:hover {
@@ -108,41 +106,61 @@ a {
 body {
     display:grid;
     grid-template-columns: 375px;
+    grid-template-areas:
+            "nav"
+            "header"
+            "trending"
+            "playlists"
+            "curated"
+            "footer";
     margin: 0 auto;
     justify-content: center;
 }
 
 /* Header */
 header {
-    grid-row: 2;
-    grid-column: 1;
+    grid-area: header;
     background-image: linear-gradient(to right, #2104D9 , black);
     padding: 0px 40px;
 }
 
 /* Nav */
 nav {
-    grid-row: 1;
-    grid-column: 1;
+    grid-area: nav;
     background-image: linear-gradient(to right, #020873 , #030A8C);
-    padding-bottom: 10px;
 }
 
 /* Trending Songs */
 #trending {
-    grid-row: 3;
-    grid-column: 1;
+    grid-area: trending;
     background-color: white;
 }
-#trending h3, #trending dl {
+#trending h3 {
     color:#590242;
+    margin: 5px;
+}
+#trending dl {
+    margin: 0px 5px;
+}
+#trending dt {
+    margin: 0px 10px 0px 0px;
+}
+#trending dd {
+    color:#590242;
+    margin: 0px;
 }
 
+
 /* Your Playlists */
+#playlists section, #curated section {
+    text-align: center;
+}
 #playlists {
-    grid-row: 4;
-    grid-column: 1;
+    grid-area: playlists;
     background-color: #2699FB;
+}
+#playlists img{
+    padding: 10px;
 }
 #playlists section {
     background-color: #0D8DFB;
@@ -150,13 +168,29 @@ nav {
 
 /* Curated Playlists */
 #curated {
-    grid-row: 5;
-    grid-column: 1;
+    grid-area: curated;
 }
-
+#curated img{
+    padding: 10px;
+}
+#curated {
+    background-color:#030A8C;
+}
+#curated section {
+    background-color:#020873;
+}
 /* Footer */
 footer {
-    grid-row: 6;
+    grid-area: footer;
+    display: flex;
+    background-color: white;
+    height: 80px;
+    align-items: end;
+    justify-content: center;
+}
+footer p {
+    color: #590242;
+    text-align: center;
 }
 
 /* Menu Code for Mobile First Style (minus the bits you know how to do):  */
@@ -166,6 +200,10 @@ ul {
     max-height: 0;
     transition: max-height .2s ease-out;
     list-style-type: none;
+    margin: 0px;
+}
+li {
+    margin-bottom: 5px;
 }
 ul li:first-child {
     font-size: 31px;
@@ -252,7 +290,6 @@ audio::-webkit-media-controls-enclosure {
     box-shadow: inset 0 0 15px #020659;
 }
 #playlists ::-webkit-scrollbar, #curated ::-webkit-scrollbar {
-    background: #020659;
     border-radius: 5px;
 }
 #playlists ::-webkit-scrollbar-track, #curated ::-webkit-scrollbar-track  {
@@ -275,7 +312,7 @@ audio::-webkit-media-controls-enclosure {
         position: absolute;
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
         text-align: center;
-        margin-left: -30px;
+        margin: 10px 0px 10px -30px;
         width: 835px;
     }
     label span, input {
@@ -294,22 +331,15 @@ audio::-webkit-media-controls-enclosure {
             "playlists curated"
             "footer footer";
     }
-    nav {
-        grid-area: nav;
+    #playlists .scroll, #curated .scroll {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(5, 1fr);
+        overflow-x: hidden;
+        overflow-y: auto;
+        height: 500px;
     }
-    header {
-        grid-area: header;
-    }
-    #trending {
-        grid-area: trending;
-    }
-    #playlists {
-        grid-area: playlists;
-    }
-    #curated {
-        grid-area: curated;
-    }
-    footer {
-        grid-area: footer;
+    #playlists section img, #curated section img{
+        float: left
     }
 }
